@@ -1,78 +1,138 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Football Game Website </title>
-        <link rel="home" type="text/css" href="football.css">
+        <title> Football Mania </title>
+        
+        <style>
+            body {
+                background-color: #FFFFFF;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>NFL Teams</h1>
-        
+            <!-- Initial screen -->
+        <div id="initialScreen" style="background-image: url('/Users/abhinnvegesna/Desktop/Football Game Website/Background Image.png'); background-size: cover; width: 100%;
+        height: 100vh;">
 
+            <div id="titleAndButtons">
+                <span id="titleFootball">Football Mania</span>
+                 <div id="buttonContainer">
+                     <button id="singlePlayer">Single Player</button>
+                     <button id="twoPlayer">Two Player</button>
+                    </div>
+            </div>
+
+        </div>
+
+        <!-- Main content -->
+        <div id="mainContent" style="display: none;" >
+        <h1>NFL Teams</h1>
+        <!-- Rest of your HTML content -->
         <p class="position">
             Team: <span id="team"> </span>
         </p>
 
         <button id="pickTeam">Generate Team</button> 
+
+        <img id="teamLogo" alt="Team Logo" style="display: none;">
+
         <button id="playAgain" class="button" style="display: none;">Play Again</button>
         <button id="computerMode">Computer Mode</button>
 
+        <div id="Teams" style="display: flex;" >
+            <div id="PlayerA" >
+                <h2> Player A Team</h2>
+    
+                <p class="position">
+                    QB <span id="QB1"></span>: <span id="QB1Overall"></span>
+                </p>
+                <p class="position">
+                    RB <span id="RB1"></span>: <span id="RB1Overall"></span>
+                </p>
+                <p class="position">
+                WR <span id="WR1"></span>: <span id="WR1Overall"></span>
+                </p>
+                <p class="position">
+                TE <span id="TE1"></span>: <span id="TE1Overall"></span>
+                </p>
+                <p class="position">
+                OL <span id="OLine1"></span>: <span id="OLine1Overall"></span>
+                </p>
+                <p class="position">
+                DEF <span id="Defense1"></span>: <span id="Defense1Overall"></span>
+                </p>
+        
+                <button id="chooseQB1">Choose QB</button>
+                <button id="chooseRB1">Choose RB</button>
+                <button id="chooseWR1">Choose WR</button>
+                <button id="chooseTE1">Choose TE</button>
+                <button id="chooseOLine1">Choose OLine</button>
+                <button id="chooseDefense1">Choose Defense</button>
+    
+            </div>
+            <div id="PlayerB" >
+                <h2> Player B Team</h2>
+    
+                <p class="position">
+                QB <span id="QB2"> </span>: <span id="QB2Overall"></span>
+                </p>
+                <p class="position">
+                RB <span id="RB2"></span>: <span id="RB2Overall"></span> </span>
+                </p>
+                <p class="position">
+                WR <span id="WR2"></span>: <span id="WR2Overall"></span> </span>
+                </p>
+                <p class="position">
+                TE <span id="TE2"></span>: <span id="TE2Overall"></span> </span>
+                </p>
+                <p class="position">
+                OL <span id="OLine2">: </span> <span id="OLine2Overall"></span>
+                </p>
+                <p class="position">
+                DEF <span id="Defense2">: </span> <span id="Defense2Overall"></span>
+                </p>
+        
+                <button id="chooseQB2">Choose QB</button>
+                <button id="chooseRB2">Choose RB</button>
+                <button id="chooseWR2">Choose WR</button>
+                <button id="chooseTE2">Choose TE</button>
+                <button id="chooseOLine2">Choose OLine</button>
+                <button id="chooseDefense2">Choose Defense</button>
+    
+            </div>
+            <div id="ComputerTeam" >
+                <h2> Computer Team</h2>
 
-        <h2> Player A Team</h2>
+                <p class="position">
+                QB <span id="QBComp"> </span>: <span id="QBCompOverall"></span>
+                </p>
+                <p class="position">
+                RB <span id="RBComp"></span>: <span id="RBCompOverall"></span> </span>
+                </p>
+                <p class="position">
+                WR <span id="WRComp"></span>: <span id="WRCompOverall"></span> </span>
+                </p>
+                <p class="position">
+                TE <span id="TEComp"></span>: <span id="TECompOverall"></span> </span>
+                </p>
+                <p class="position">
+                OL <span id="OLineComp">: </span> <span id="OLineCompOverall"></span>
+                </p>
+                <p class="position">
+                DEF <span id="DefenseComp">: </span> <span id="DefenseCompOverall"></span>
+                </p>
 
-        <p class="position">
-            QB <span id="QB1"></span>: <span id="QB1Overall"></span>
-        </p>
-        <p class="position">
-            RB <span id="RB1"></span>: <span id="RB1Overall"></span>
-        </p>
-        <p class="position">
-        WR <span id="WR1"></span>: <span id="WR1Overall"></span>
-        </p>
-        <p class="position">
-        TE <span id="TE1"></span>: <span id="TE1Overall"></span>
-        </p>
-        <p class="position">
-        OL <span id="OLine1"></span>: <span id="OLine1Overall"></span>
-        </p>
-        <p class="position">
-        DEF <span id="Defense1"></span>: <span id="Defense1Overall"></span>
-        </p>
+            </div>
 
-        <button id="chooseQB1">Choose QB</button>
-        <button id="chooseRB1">Choose RB</button>
-        <button id="chooseWR1">Choose WR</button>
-        <button id="chooseTE1">Choose TE</button>
-        <button id="chooseOLine1">Choose OLine</button>
-        <button id="chooseDefense1">Choose Defense</button>
+        </div>
 
-        <h3> Player B Team / Computer</h3>
+        
 
-        <p class="position">
-        QB <span id="QB2"> </span>: <span id="QB2Overall"></span>
-        </p>
-        <p class="position">
-        RB <span id="RB2"></span>: <span id="RB2Overall"></span> </span>
-        </p>
-        <p class="position">
-        WR <span id="WR2"></span>: <span id="WR2Overall"></span> </span>
-        </p>
-        <p class="position">
-        TE <span id="TE2"></span>: <span id="TE2Overall"></span> </span>
-        </p>
-        <p class="position">
-        OL <span id="OLine2">: </span> <span id="OLine2Overall"></span>
-        </p>
-        <p class="position">
-        DEF <span id="Defense2">: </span> <span id="Defense2Overall"></span>
-        </p>
 
-        <button id="chooseQB2">Choose QB</button>
-        <button id="chooseRB2">Choose RB</button>
-        <button id="chooseWR2">Choose WR</button>
-        <button id="chooseTE2">Choose TE</button>
-        <button id="chooseOLine2">Choose OLine</button>
-        <button id="chooseDefense2">Choose Defense</button>
+       
+
+    
 
         <p class="position">
             Winner: <span id="Winner"> </span>
@@ -84,28 +144,14 @@
             Player B Score: <span id="player2Score"> </span>
             </p>
         
-            <h3> Computer Team</h3>
-
-            <p class="position">
-            QB <span id="QBComp"> </span>: <span id="QBCompOverall"></span>
-            </p>
-            <p class="position">
-            RB <span id="RBComp"></span>: <span id="RBCompOverall"></span> </span>
-            </p>
-            <p class="position">
-            WR <span id="WRComp"></span>: <span id="WRCompOverall"></span> </span>
-            </p>
-            <p class="position">
-            TE <span id="TEComp"></span>: <span id="TECompOverall"></span> </span>
-            </p>
-            <p class="position">
-            OL <span id="OLineComp">: </span> <span id="OLineCompOverall"></span>
-            </p>
-            <p class="position">
-            DEF <span id="DefenseComp">: </span> <span id="DefenseCompOverall"></span>
-            </p>
+        
+        
+            
+        </div>
     
-        <script src="football.js"></script>
+        <script src="football.js"></script>        
+        <link rel="stylesheet" type="text/css" href="football.css">
+
     </body>
 
 
