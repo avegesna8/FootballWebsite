@@ -1,6 +1,6 @@
 //const { get } = require('https');
 
-// NFl Teams
+// Global Variables
 const apiUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams';
 const nflTeams = []
 chosenTeams = []
@@ -53,6 +53,7 @@ const computerTeam = {
   OLineOverall: null,
   DefenseOverall: null    
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to fetch NFL teams from the API
 async function fetchNFLTeams() {
@@ -70,7 +71,8 @@ async function fetchNFLTeams() {
             abbreviation: team.team.abbreviation,
             displayName: team.team.displayName,
             location: team.team.location,
-            color: team.team.color
+            color: team.team.color,
+            imageUrl: team.team.logos[0].href
         }));
 
         teamData.forEach(team => {
@@ -82,8 +84,6 @@ async function fetchNFLTeams() {
         console.error(error);
     }
 }
-
-
 
 //Print Out NFL Teams
 function printNFLTeams() {
@@ -115,10 +115,17 @@ async function getRandomTeam() {
 async function displayTeam() {
     currentTeam = await getRandomTeam()
     chosenTeams.push(currentTeam)
-
+    document.getElementById("teamLogo").style.display = "inline-block"
+    //const teamLogo = document.getElementById("teamLogo");
+    teamData =  await fetchNFLTeams()
+    team = teamData.find(team => team.displayName === currentTeam);
+    teamLogo.src = team.imageUrl
+    
     document.getElementById("team").textContent = currentTeam
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to handle player 1's choice
 async function choosePosition1(position) {
@@ -263,148 +270,6 @@ function allPlayer2PositionsSelected() {
   }
   return true; // All positions are selected
 }
-
-function endGame() {
-  if (computerMode) {
-    disableTeamButton();
-    document.getElementById("playAgain").style.display = "block";
-    totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
-    totalComputerRating = computerTeam.QBOverall + computerTeam.RBOverall + computerTeam.WROverall + computerTeam.TEOverall + computerTeam.OLineOverall + computerTeam.DefenseOverall
-    if (totalPlayer1Rating > totalComputerRating) {
-      document.getElementById("Winner").textContent = "Player A"
-      player1Score += 1
-      document.getElementById("player1Score").textContent = player1Score.toString()
-    } else if (totalPlayer1Rating < totalComputerRating) {
-      document.getElementById("Winner").textContent = "Player B".toString()
-      player2Score += 1
-      document.getElementById("player2Score").textContent = player2Score
-    } else {
-      //Tie Game
-      document.getElementById("Winner").textContent = "Tie"
-    }
-  } else {
-    disableTeamButton();
-    document.getElementById("playAgain").style.display = "block";
-    totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
-    totalPlayer2Rating = player2Team.QBOverall + player2Team.RBOverall + player2Team.WROverall + player2Team.TEOverall + player2Team.OLineOverall + player2Team.DefenseOverall
-    if (totalPlayer1Rating > totalPlayer2Rating) {
-      document.getElementById("Winner").textContent = "Player A"
-      player1Score += 1
-      document.getElementById("player1Score").textContent = player1Score.toString()
-    } else if (totalPlayer1Rating < totalPlayer2Rating) {
-      document.getElementById("Winner").textContent = "Player B".toString()
-      player2Score += 1
-      document.getElementById("player2Score").textContent = player2Score
-    } else {
-      //Tie Game
-      document.getElementById("Winner").textContent = "Tie"
-    }
-  }
-    
-}
-
-document.getElementById("playAgain").addEventListener("click", () => {
-  restartGame()
-});
-
-function restartGame() {
-  document.getElementById("playAgain").style.display = "none";
-  enableTeamButton();
-  chosenTeams = []
-  currentTeam = null
-  playerData = null
-  currentPlayer = null
-  currentUser = "Player 1"
-  player1Team.QB = null
-  player1Team.RB = null
-  player1Team.TE = null
-  player1Team.WR = null
-  player1Team.OLine = null
-  player1Team.Defense = null
-  player1Team.QBOverall = null
-  player1Team.RBOverall = null
-  player1Team.TEOverall = null
-  player1Team.WROverall = null
-  player1Team.OLineOverall = null
-  player1Team.DefenseOverall = null
-
-  document.getElementById("QB1").textContent = ""
-  document.getElementById("QB1Overall").textContent = ""
-  document.getElementById("RB1").textContent = ""
-  document.getElementById("RB1Overall").textContent = ""
-  document.getElementById("WR1").textContent = ""
-  document.getElementById("WR1Overall").textContent = ""
-  document.getElementById("TE1").textContent = ""
-  document.getElementById("TE1Overall").textContent = ""
-  document.getElementById("OLine1").textContent = ""
-  document.getElementById("OLine1Overall").textContent = ""
-  document.getElementById("Defense1").textContent = ""
-  document.getElementById("Defense1Overall").textContent = ""
-
-  if (!computerMode) {
-    player2Team.QB = null
-    player2Team.RB = null
-    player2Team.TE = null
-    player2Team.WR = null
-    player2Team.OLine = null
-    player2Team.Defense = null
-    player2Team.QBOverall = null
-    player2Team.RBOverall = null
-    player2Team.TEOverall = null
-    player2Team.WROverall = null
-    player2Team.OLineOverall = null
-    player2Team.DefenseOverall = null
-  
-    document.getElementById("QB2").textContent = ""
-    document.getElementById("QB2Overall").textContent = ""
-    document.getElementById("RB2").textContent = ""
-    document.getElementById("RB2Overall").textContent = ""
-    document.getElementById("WR2").textContent = ""
-    document.getElementById("WR2Overall").textContent = ""
-    document.getElementById("TE2").textContent = ""
-    document.getElementById("TE2Overall").textContent = ""
-    document.getElementById("OLine2").textContent = ""
-    document.getElementById("OLine2Overall").textContent = ""
-    document.getElementById("Defense2").textContent = ""
-    document.getElementById("Defense2Overall").textContent = ""
-  } else {
-    computerTeam.QB = null
-    computerTeam.RB = null
-    computerTeam.TE = null
-    computerTeam.WR = null
-    computerTeam.OLine = null
-    computerTeam.Defense = null
-    computerTeam.QBOverall = null
-    computerTeam.RBOverall = null
-    computerTeam.TEOverall = null
-    computerTeam.WROverall = null
-    computerTeam.OLineOverall = null
-    computerTeam.DefenseOverall = null
-  
-    document.getElementById("QBComp").textContent = ""
-    document.getElementById("QBCompOverall").textContent = ""
-    document.getElementById("RBComp").textContent = ""
-    document.getElementById("RBCompOverall").textContent = ""
-    document.getElementById("WRComp").textContent = ""
-    document.getElementById("WRCompOverall").textContent = ""
-    document.getElementById("TEComp").textContent = ""
-    document.getElementById("TECompOverall").textContent = ""
-    document.getElementById("OLineComp").textContent = ""
-    document.getElementById("OLineCompOverall").textContent = ""
-    document.getElementById("DefenseComp").textContent = ""
-    document.getElementById("DefenseCompOverall").textContent = ""
-  }
-
-
-
-  
-
-  document.getElementById("Winner").textContent = ""
-
-
-}
-
-
 
 // Function to handle player 2's choice
 async function choosePosition2(position) {
@@ -656,7 +521,7 @@ async function choosePositionComputer() {
     currentUser = "Player 1"
     if (proceed) {
       if (allComputerPositionsSelected()) {
-        document.getElementById("RB1").textContent = "END"
+        //document.getElementById("RB1").textContent = "END"
         endGame();
       } else {
         document.getElementById("pickTeam").disabled = false;
@@ -687,6 +552,22 @@ function allComputerPositionsSelected() {
   }
   return true; // All positions are selected
 }
+
+// Get references to the initial screen and the main content divs
+var initialScreen = document.getElementById("initialScreen");
+var mainContent = document.getElementById("mainContent");
+
+// Get reference to the Start button
+//var startButton = document.getElementById("startButton");
+
+
+// // Add event listener to the Start button
+// startButton.addEventListener("click", function() {
+//     // Hide the initial screen
+//     initialScreen.style.display = "none";
+//     // Show the main content
+//     mainContent.style.display = "block";
+// });
 
 
 
@@ -740,8 +621,26 @@ function allComputerPositionsSelected() {
       choosePosition2("Defense")
     });
 
-    document.getElementById("computerMode").addEventListener("click", () => {
+    document.getElementById("twoPlayer").addEventListener("click", () => {
+      // Hide the initial screen
+      initialScreen.style.display = "none";
+      // Show the main content
+      mainContent.style.display = "block";
+      document.getElementById("ComputerTeam").style.display = "none"
+      document.getElementById("computerMode").style.display = "none"
+    })
+
+    document.getElementById("singlePlayer").addEventListener("click", () => {
+      // Hide the initial screen
+      initialScreen.style.display = "none";
+      // Show the main content
+      mainContent.style.display = "block";
+      document.getElementById("PlayerB").style.display = "none"
       activateComputerMode()
+    });
+
+    document.getElementById("playAgain").addEventListener("click", () => {
+      restartGame()
     });
 
     function activateComputerMode() {
@@ -820,6 +719,138 @@ async function disableTeamButton() {
 }
 async function enableTeamButton() {
   document.getElementById("pickTeam").disabled = false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//END Game
+function endGame() {
+  if (computerMode) {
+    disableTeamButton();
+    document.getElementById("playAgain").style.display = "block";
+    totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
+    totalComputerRating = computerTeam.QBOverall + computerTeam.RBOverall + computerTeam.WROverall + computerTeam.TEOverall + computerTeam.OLineOverall + computerTeam.DefenseOverall
+    if (totalPlayer1Rating > totalComputerRating) {
+      document.getElementById("Winner").textContent = "Player A"
+      player1Score += 1
+      document.getElementById("player1Score").textContent = player1Score.toString()
+    } else if (totalPlayer1Rating < totalComputerRating) {
+      document.getElementById("Winner").textContent = "Player B".toString()
+      player2Score += 1
+      document.getElementById("player2Score").textContent = player2Score
+    } else {
+      //Tie Game
+      document.getElementById("Winner").textContent = "Tie"
+    }
+  } else {
+    disableTeamButton();
+    document.getElementById("playAgain").style.display = "block";
+    totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
+    totalPlayer2Rating = player2Team.QBOverall + player2Team.RBOverall + player2Team.WROverall + player2Team.TEOverall + player2Team.OLineOverall + player2Team.DefenseOverall
+    if (totalPlayer1Rating > totalPlayer2Rating) {
+      document.getElementById("Winner").textContent = "Player A"
+      player1Score += 1
+      document.getElementById("player1Score").textContent = player1Score.toString()
+    } else if (totalPlayer1Rating < totalPlayer2Rating) {
+      document.getElementById("Winner").textContent = "Player B".toString()
+      player2Score += 1
+      document.getElementById("player2Score").textContent = player2Score
+    } else {
+      //Tie Game
+      document.getElementById("Winner").textContent = "Tie"
+    }
+  }
+    
+}
+
+function restartGame() {
+  document.getElementById("playAgain").style.display = "none";
+  enableTeamButton();
+  chosenTeams = []
+  currentTeam = null
+  playerData = null
+  currentPlayer = null
+  currentUser = "Player 1"
+  player1Team.QB = null
+  player1Team.RB = null
+  player1Team.TE = null
+  player1Team.WR = null
+  player1Team.OLine = null
+  player1Team.Defense = null
+  player1Team.QBOverall = null
+  player1Team.RBOverall = null
+  player1Team.TEOverall = null
+  player1Team.WROverall = null
+  player1Team.OLineOverall = null
+  player1Team.DefenseOverall = null
+
+  document.getElementById("QB1").textContent = ""
+  document.getElementById("QB1Overall").textContent = ""
+  document.getElementById("RB1").textContent = ""
+  document.getElementById("RB1Overall").textContent = ""
+  document.getElementById("WR1").textContent = ""
+  document.getElementById("WR1Overall").textContent = ""
+  document.getElementById("TE1").textContent = ""
+  document.getElementById("TE1Overall").textContent = ""
+  document.getElementById("OLine1").textContent = ""
+  document.getElementById("OLine1Overall").textContent = ""
+  document.getElementById("Defense1").textContent = ""
+  document.getElementById("Defense1Overall").textContent = ""
+
+  if (!computerMode) {
+    player2Team.QB = null
+    player2Team.RB = null
+    player2Team.TE = null
+    player2Team.WR = null
+    player2Team.OLine = null
+    player2Team.Defense = null
+    player2Team.QBOverall = null
+    player2Team.RBOverall = null
+    player2Team.TEOverall = null
+    player2Team.WROverall = null
+    player2Team.OLineOverall = null
+    player2Team.DefenseOverall = null
+  
+    document.getElementById("QB2").textContent = ""
+    document.getElementById("QB2Overall").textContent = ""
+    document.getElementById("RB2").textContent = ""
+    document.getElementById("RB2Overall").textContent = ""
+    document.getElementById("WR2").textContent = ""
+    document.getElementById("WR2Overall").textContent = ""
+    document.getElementById("TE2").textContent = ""
+    document.getElementById("TE2Overall").textContent = ""
+    document.getElementById("OLine2").textContent = ""
+    document.getElementById("OLine2Overall").textContent = ""
+    document.getElementById("Defense2").textContent = ""
+    document.getElementById("Defense2Overall").textContent = ""
+  } else {
+    computerTeam.QB = null
+    computerTeam.RB = null
+    computerTeam.TE = null
+    computerTeam.WR = null
+    computerTeam.OLine = null
+    computerTeam.Defense = null
+    computerTeam.QBOverall = null
+    computerTeam.RBOverall = null
+    computerTeam.TEOverall = null
+    computerTeam.WROverall = null
+    computerTeam.OLineOverall = null
+    computerTeam.DefenseOverall = null
+  
+    document.getElementById("QBComp").textContent = ""
+    document.getElementById("QBCompOverall").textContent = ""
+    document.getElementById("RBComp").textContent = ""
+    document.getElementById("RBCompOverall").textContent = ""
+    document.getElementById("WRComp").textContent = ""
+    document.getElementById("WRCompOverall").textContent = ""
+    document.getElementById("TEComp").textContent = ""
+    document.getElementById("TECompOverall").textContent = ""
+    document.getElementById("OLineComp").textContent = ""
+    document.getElementById("OLineCompOverall").textContent = ""
+    document.getElementById("DefenseComp").textContent = ""
+    document.getElementById("DefenseCompOverall").textContent = ""
+  }
+
+  document.getElementById("Winner").textContent = ""
 }
 
 
