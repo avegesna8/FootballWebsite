@@ -120,10 +120,17 @@ async function displayTeam() {
     teamData =  await fetchNFLTeams()
     team = teamData.find(team => team.displayName === currentTeam);
     teamLogo.src = team.imageUrl
-    
     document.getElementById("team").textContent = currentTeam
 
 }
+
+function displayPlayerLogo(playerID) {
+  //document.getElementById("playerLogo").style.display = "visible"
+  document.getElementById("playerLogo").style.display = "inline-block"
+  playerLogo.src = "https://a.espncdn.com/i/headshots/nfl/players/full/" + playerID + ".png"
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,8 +152,15 @@ async function choosePosition1(position) {
         if (position === "QB") {
             currentPlayer = nflData[currentTeam]["QB"]
             overall = nflData[currentTeam]["QBOverall"]
+            playerID = nflData[currentTeam]["QBID"]
+            displayPlayerLogo(playerID)
+            //document.getElementById("QB1").textContent = playerID
+            
+            //nflData[currentTeam["QBID"]]
             player1Team.QB = currentPlayer
             player1Team.QBOverall = parseInt(overall)
+            
+
             document.getElementById("QB1").textContent = currentPlayer
             document.getElementById("QB1Overall").textContent = overall
             disablePlayer1Choices();
@@ -155,6 +169,8 @@ async function choosePosition1(position) {
           
             currentPlayer = nflData[currentTeam]["RB"]
             overall = nflData[currentTeam]["RBOverall"]
+            playerID = nflData[currentTeam]["RBID"]
+            displayPlayerLogo(playerID)
             player1Team.RB = currentPlayer
             player1Team.RBOverall = parseInt(overall)
             document.getElementById("RB1").textContent = currentPlayer
@@ -166,6 +182,8 @@ async function choosePosition1(position) {
           
             currentPlayer = nflData[currentTeam]["WR"]
             overall = nflData[currentTeam]["WROverall"]
+            playerID = nflData[currentTeam]["WRID"]
+            displayPlayerLogo(playerID)
             player1Team.WR = currentPlayer
             player1Team.WROverall = parseInt(overall)
             document.getElementById("WR1").textContent = currentPlayer
@@ -177,6 +195,8 @@ async function choosePosition1(position) {
           
             currentPlayer = nflData[currentTeam]["TE"]
             overall = nflData[currentTeam]["TEOverall"]
+            playerID = nflData[currentTeam]["TEID"]
+            displayPlayerLogo(playerID)
             player1Team.TE = currentPlayer
             player1Team.TEOverall = parseInt(overall)
             document.getElementById("TE1").textContent = currentPlayer
@@ -188,6 +208,8 @@ async function choosePosition1(position) {
           
           currentPlayer = nflData[currentTeam]["OLine"]
           rating = nflData[currentTeam]["OLineOverall"]
+          playerID = nflData[currentTeam]["OLineID"]
+          displayPlayerLogo(playerID)
           number = ratingToNumber(rating)
           player1Team.OLine = currentPlayer
           player1Team.OLineOverall = number
@@ -200,6 +222,8 @@ async function choosePosition1(position) {
           
           currentPlayer = nflData[currentTeam]["Defense"]
           rating = nflData[currentTeam]["DefenseOverall"]
+          playerID = nflData[currentTeam]["DefenseID"]
+          displayPlayerLogo(playerID)
           number = ratingToNumber(rating)
           player1Team.Defense = currentPlayer
           player1Team.DefenseOverall = number
@@ -287,6 +311,8 @@ async function choosePosition2(position) {
       if (position === "QB") {
           currentPlayer = nflData[currentTeam]["QB"]
           overall = nflData[currentTeam]["QBOverall"]
+          playerID = nflData[currentTeam]["QBID"]
+          displayPlayerLogo(playerID)
           player2Team.QBOverall = parseInt(overall)
           player2Team.QB = currentPlayer
           document.getElementById("QB2").textContent = currentPlayer
@@ -296,6 +322,8 @@ async function choosePosition2(position) {
       } else if (position === "RB") {
           currentPlayer = nflData[currentTeam]["RB"]
           overall = nflData[currentTeam]["RBOverall"]
+          playerID = nflData[currentTeam]["RBID"]
+          displayPlayerLogo(playerID)
           player2Team.RBOverall = parseInt(overall)
           player2Team.RB = currentPlayer
           document.getElementById("RB2").textContent = currentPlayer
@@ -306,6 +334,8 @@ async function choosePosition2(position) {
         
          currentPlayer = nflData[currentTeam]["WR"]
          overall = nflData[currentTeam]["WROverall"]
+         playerID = nflData[currentTeam]["WRID"]
+          displayPlayerLogo(playerID)
           player2Team.WR = currentPlayer
           player2Team.WROverall = parseInt(overall)
           document.getElementById("WR2").textContent = currentPlayer
@@ -318,6 +348,8 @@ async function choosePosition2(position) {
         
           currentPlayer = nflData[currentTeam]["TE"]
           overall = nflData[currentTeam]["TEOverall"]
+          playerID = nflData[currentTeam]["TEID"]
+          displayPlayerLogo(playerID)
           player2Team.TE = currentPlayer
           player2Team.TEOverall = parseInt(overall)
           document.getElementById("TE2").textContent = currentPlayer
@@ -329,6 +361,8 @@ async function choosePosition2(position) {
         
           currentPlayer = nflData[currentTeam]["OLine"]
           rating = nflData[currentTeam]["OLineOverall"]
+          playerID = nflData[currentTeam]["OLineID"]
+          displayPlayerLogo(playerID)
           number = ratingToNumber(rating)
           player2Team.OLine = currentPlayer
           player2Team.OLineOverall = number
@@ -341,6 +375,8 @@ async function choosePosition2(position) {
         
           currentPlayer = nflData[currentTeam]["Defense"]
           rating = nflData[currentTeam]["DefenseOverall"]
+          playerID = nflData[currentTeam]["DefenseID"]
+          displayPlayerLogo(playerID)
           number = ratingToNumber(rating)
           player2Team.Defense = currentPlayer
           player2Team.DefenseOverall = number
@@ -462,6 +498,10 @@ async function choosePositionComputer() {
       //document.getElementById("RB1").textContent = "QB"
       currentPlayer = nflData[currentTeam]["QB"]
       computerTeam.QBOverall = qbOverall
+
+      playerID = nflData[currentTeam]["QBID"]
+      displayPlayerLogo(playerID)
+      
       computerTeam.QB = currentPlayer
       document.getElementById("QBComp").textContent = currentPlayer
       document.getElementById("QBCompOverall").textContent = qbOverall
@@ -471,6 +511,8 @@ async function choosePositionComputer() {
       //document.getElementById("RB1").textContent = "RB"
       currentPlayer = nflData[currentTeam]["RB"]
       computerTeam.RBOverall = rbOverall
+      playerID = nflData[currentTeam]["RBID"]
+      displayPlayerLogo(playerID)
       computerTeam.RB = currentPlayer
       document.getElementById("RBComp").textContent = currentPlayer
       document.getElementById("RBCompOverall").textContent = rbOverall
@@ -479,6 +521,8 @@ async function choosePositionComputer() {
     } else if (wrOverall == max && computerTeam.WR == null) {
       //document.getElementById("RB1").textContent = "WR"
       currentPlayer = nflData[currentTeam]["WR"]
+      playerID = nflData[currentTeam]["WRID"]
+      displayPlayerLogo(playerID)
       computerTeam.WROverall = wrOverall
       computerTeam.WR = currentPlayer
       document.getElementById("WRComp").textContent = currentPlayer
@@ -488,6 +532,8 @@ async function choosePositionComputer() {
     } else if (teOverall ==  max && computerTeam.TE == null) {
       //document.getElementById("RB1").textContent = "TE"
       currentPlayer = nflData[currentTeam]["TE"]
+      playerID = nflData[currentTeam]["TEID"]
+      displayPlayerLogo(playerID)
       computerTeam.TEOverall = teOverall
       computerTeam.TE = currentPlayer
       document.getElementById("TEComp").textContent = currentPlayer
@@ -497,6 +543,8 @@ async function choosePositionComputer() {
     } else if (oLineOverall == max && computerTeam.OLine == null) {
       //document.getElementById("RB1").textContent = "OLine"
       currentPlayer = nflData[currentTeam]["OLine"]
+      playerID = nflData[currentTeam]["OLineID"]
+      displayPlayerLogo(playerID)
       computerTeam.OLineOverall = oLineOverall
       computerTeam.OLine = currentPlayer
       document.getElementById("OLineComp").textContent = currentPlayer
@@ -506,6 +554,8 @@ async function choosePositionComputer() {
     } else if (defenseOverall == max && computerTeam.Defense == null) {
       //document.getElementById("RB1").textContent = "Defense"
       currentPlayer = nflData[currentTeam]["Defense"]
+      playerID = nflData[currentTeam]["DefenseID"]
+      displayPlayerLogo(playerID)
       computerTeam.DefenseOverall = defenseOverall
       computerTeam.Defense = currentPlayer
       document.getElementById("DefenseComp").textContent = currentPlayer
@@ -527,7 +577,7 @@ async function choosePositionComputer() {
         document.getElementById("pickTeam").disabled = false;
       }
     }
-  }, 0);
+  }, 3000);
   
   
 
@@ -654,6 +704,7 @@ var mainContent = document.getElementById("mainContent");
         document.getElementById("computerMode").style.display= "none"
       }
       if (currentUser == "Player 1") {
+        document.getElementById("playerLogo").style.display = "none"
         enablePlayer1Choices();
         disablePlayer2Choices();
         if (player1Team.QB !== null) {
@@ -680,6 +731,7 @@ var mainContent = document.getElementById("mainContent");
       } else if (currentUser == "Player 2") {
         enablePlayer2Choices();
         disablePlayer1Choices();
+        document.getElementById("playerLogo").style.display = "none"
         if (player2Team.QB !== null) {
           document.getElementById("chooseQB2").disabled = true;
         }
@@ -701,10 +753,15 @@ var mainContent = document.getElementById("mainContent");
         callDisplayTeam();
         disableTeamButton();
       } else {
-        disablePlayer1Choices();
-        callDisplayTeam();
-        disableTeamButton();
-        choosePositionComputer();
+        
+        setTimeout(() => {
+          document.getElementById("playerLogo").style.display = "none"
+          disablePlayer1Choices();
+          callDisplayTeam();
+          disableTeamButton();
+          choosePositionComputer();
+
+        }, 3000);
         
       }
 
@@ -764,6 +821,8 @@ function endGame() {
 
 function restartGame() {
   document.getElementById("playAgain").style.display = "none";
+  document.getElementById("playerLogo").style.display = "none";
+  document.getElementById("teamLogo").style.display = "none";
   enableTeamButton();
   chosenTeams = []
   currentTeam = null
@@ -868,7 +927,13 @@ async function depthChart() {
           "WROverall": "70",
           "TEOverall": "76",
           "OLineOverall": "B-",
-          "DefenseOverall": "B+"
+          "DefenseOverall": "B+",
+          "QBID": "3918298",
+          "RBID": "4379399",
+          "WRID": "4373678",
+          "TEID": "4385690",
+          "OLineID": "4033748",
+          "DefenseID": "13976"
         },
         "Miami Dolphins": {
           "QB": "Tua Tagovailoa",
@@ -882,7 +947,13 @@ async function depthChart() {
           "WROverall": "98",
           "TEOverall": "74",
           "OLineOverall": "C+",
-          "DefenseOverall": "C+"
+          "DefenseOverall": "C+",
+          "QBID": "4241479",
+          "RBID": "2576414",
+          "WRID": "3116406",
+          "TEID": "3054212",
+          "OLineID": "4040537",
+          "DefenseID": "3045373"
         },
         "New England Patriots": {
           "QB": "Drake Maye",
@@ -896,7 +967,13 @@ async function depthChart() {
           "WROverall": "78",
           "TEOverall": "81",
           "OLineOverall": "C-",
-          "DefenseOverall": "A-"
+          "DefenseOverall": "A-",
+          "QBID": "4431452",
+          "RBID": "4569173",
+          "WRID": "3045523",
+          "TEID": "3046439",
+          "OLineID": "4362732",
+          "DefenseID": "3961466"
         },
         "New York Jets": {
           "QB": "Aaron Rodgers",
@@ -910,7 +987,13 @@ async function depthChart() {
           "WROverall": "84",
           "TEOverall": "78",
           "OLineOverall": "B+",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "8439",
+          "RBID": "4427366",
+          "WRID": "4569618",
+          "TEID": "3915486",
+          "OLineID": "13978",
+          "DefenseID": "4427250"
         },
         "Baltimore Ravens": {
           "QB": "Lamar Jackson",
@@ -924,7 +1007,13 @@ async function depthChart() {
           "WROverall": "77",
           "TEOverall": "95",
           "OLineOverall": "B-",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "3916387",
+          "RBID": "3043078",
+          "WRID": "4429615",
+          "TEID": "3116365",
+          "OLineID": "4360499",
+          "DefenseID": "3915189"
         },
         "Cincinnati Bengals": {
           "QB": "Joe Burrow",
@@ -938,7 +1027,13 @@ async function depthChart() {
           "WROverall": "94",
           "TEOverall": "81",
           "OLineOverall": "B+",
-          "DefenseOverall": "C-"
+          "DefenseOverall": "C-",
+          "QBID": "3915511",
+          "RBID": "4035676",
+          "WRID": "4362628",
+          "TEID": "3116164",
+          "OLineID": "2576188",
+          "DefenseID": "3052743"
         },
         "Cleveland Browns": {
           "QB": "Deshaun Watson",
@@ -952,7 +1047,13 @@ async function depthChart() {
           "WROverall": "91",
           "TEOverall": "84",
           "OLineOverall": "A+",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "3122840",
+          "RBID": "3128720",
+          "WRID": "2976499",
+          "TEID": "3123076",
+          "OLineID": "3042738",
+          "DefenseID": "3122132"
         },
         "Pittsburgh Steelers": {
           "QB": "Russell Wilson",
@@ -966,7 +1067,13 @@ async function depthChart() {
           "WROverall": "80",
           "TEOverall": "85",
           "OLineOverall": "C+",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "14881",
+          "RBID": "4241457",
+          "WRID": "4426354",
+          "TEID": "4361411",
+          "OLineID": "4429775",
+          "DefenseID": "3045282"
         },
         "Houston Texans": {
           "QB": "C.J. Stroud",
@@ -980,7 +1087,13 @@ async function depthChart() {
           "WROverall": "96",
           "TEOverall": "82",
           "OLineOverall": "A-",
-          "DefenseOverall": "B-"
+          "DefenseOverall": "B-",
+          "QBID": "4432577",
+          "RBID": "3116385",
+          "WRID": "2976212",
+          "TEID": "3117256",
+          "OLineID": "4361425",
+          "DefenseID": "4685724"
         },
         "Indianapolis Colts": {
           "QB": "Anthony Richardson",
@@ -994,7 +1107,13 @@ async function depthChart() {
           "WROverall": "85",
           "TEOverall": "68",
           "OLineOverall": "A-",
-          "DefenseOverall": "C+"
+          "DefenseOverall": "C+",
+          "QBID": "4429084",
+          "RBID": "4242335",
+          "WRID": "4035687",
+          "TEID": "4039160",
+          "OLineID": "2578475",
+          "DefenseID": "2971282"
         },
         "Jacksonville Jaguars": {
           "QB": "Trevor Lawrence",
@@ -1008,7 +1127,13 @@ async function depthChart() {
           "WROverall": "85",
           "TEOverall": "84",
           "OLineOverall": "C+",
-          "DefenseOverall": "B+"
+          "DefenseOverall": "B+",
+          "QBID": "4360310",
+          "RBID": "4239996",
+          "WRID": "3895856",
+          "TEID": "3051876",
+          "OLineID": "2514122",
+          "DefenseID": "3915239"
         },
         "Tennessee Titans": {
           "QB": "Will Levis",
@@ -1022,7 +1147,13 @@ async function depthChart() {
           "WROverall": "85",
           "TEOverall": "71",
           "OLineOverall": "C-",
-          "DefenseOverall": "C+"
+          "DefenseOverall": "C+",
+          "QBID": "4361418",
+          "RBID": "3916148",
+          "WRID": "3925357",
+          "TEID": "4360635",
+          "OLineID": "4035448",
+          "DefenseID": "4040432"
         },
         "Denver Broncos": {
           "QB": "Bo Nix",
@@ -1036,7 +1167,13 @@ async function depthChart() {
           "WROverall": "82",
           "TEOverall": "72",
           "OLineOverall": "B-",
-          "DefenseOverall": "F+"
+          "DefenseOverall": "F+",
+          "QBID": "4426338",
+          "RBID": "4361579",
+          "WRID": "3128429",
+          "TEID": "3911853",
+          "OLineID": "4039018",
+          "DefenseID": "4372012"
         },
         "Kansas City Chiefs": {
           "QB": "Patrick Mahomes",
@@ -1050,7 +1187,13 @@ async function depthChart() {
           "WROverall": "73",
           "TEOverall": "99",
           "OLineOverall": "A-",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "3139477",
+          "RBID": "4361529",
+          "WRID": "4428331",
+          "TEID": "15847",
+          "OLineID": "4241385",
+          "DefenseID": "3044859"
         },
         "Las Vegas Raiders": {
           "QB": "Aidan O'Connell",
@@ -1064,7 +1207,13 @@ async function depthChart() {
           "WROverall": "97",
           "TEOverall": "73",
           "OLineOverall": "F+",
-          "DefenseOverall": "A-"
+          "DefenseOverall": "A-",
+          "QBID": "4260394",
+          "RBID": "4361777",
+          "WRID": "16800",
+          "TEID": "4432665",
+          "OLineID": "3932244",
+          "DefenseID": "3916655"
         },
         "Los Angeles Chargers": {
           "QB": "Justin Herbert",
@@ -1078,7 +1227,13 @@ async function depthChart() {
           "WROverall": "78",
           "TEOverall": "77",
           "OLineOverall": "B+",
-          "DefenseOverall": "C-"
+          "DefenseOverall": "C-",
+          "QBID": "4038941",
+          "RBID": "3051926",
+          "WRID": "4242433",
+          "TEID": "3127292",
+          "OLineID": "16864",
+          "DefenseID": "3051389"
         },
         "Dallas Cowboys": {
           "QB": "Dak Prescott",
@@ -1092,7 +1247,13 @@ async function depthChart() {
           "WROverall": "90",
           "TEOverall": "71",
           "OLineOverall": "B-",
-          "DefenseOverall": "A+"
+          "DefenseOverall": "A+",
+          "QBID": "2577417",
+          "RBID": "3051392",
+          "WRID": "4241389",
+          "TEID": "4242355",
+          "OLineID": "4241087",
+          "DefenseID": "4361423"
         },
         "New York Giants": {
           "QB": "Daniel Jones",
@@ -1106,7 +1267,13 @@ async function depthChart() {
           "WROverall": "68",
           "TEOverall": "86",
           "OLineOverall": "C+",
-          "DefenseOverall": "C-"
+          "DefenseOverall": "C-",
+          "QBID": "3917792",
+          "RBID": "4040761",
+          "WRID": "4595348",
+          "TEID": "2576925",
+          "OLineID": "4240771",
+          "DefenseID": "4426326"
         },
         "Philadelphia Eagles": {
           "QB": "Jalen Hurts",
@@ -1120,7 +1287,13 @@ async function depthChart() {
           "WROverall": "91",
           "TEOverall": "89",
           "OLineOverall": "A+",
-          "DefenseOverall": "C+"
+          "DefenseOverall": "C+",
+          "QBID": "4040715",
+          "RBID": "3929630",
+          "WRID": "4047646",
+          "TEID": "3121023",
+          "OLineID": "4361178",
+          "DefenseID": "15863"
         },
         "Washington Commanders": {
           "QB": "Jayden Daniels",
@@ -1134,7 +1307,13 @@ async function depthChart() {
           "WROverall": "92",
           "TEOverall": "83",
           "OLineOverall": "F+",
-          "DefenseOverall": "F+"
+          "DefenseOverall": "F+",
+          "QBID": "4426348",
+          "RBID": "3068267",
+          "WRID": "3121422",
+          "TEID": "15835",
+          "OLineID": "4035788",
+          "DefenseID": "3054840"
         },
         "Chicago Bears": {
             "QB": "Caleb Williams",
@@ -1148,7 +1327,13 @@ async function depthChart() {
             "WROverall": "86",
             "TEOverall": "79",
             "OLineOverall": "A-",
-            "DefenseOverall": "B-"
+            "DefenseOverall": "B-",
+            "QBID": "4431611",
+            "RBID": "4259545",
+            "WRID": "3915416",
+            "TEID": "4258595",
+            "OLineID": "3052180",
+            "DefenseID": "3134690"
           },
           "Detroit Lions": {
             "QB": "Jared Goff",
@@ -1162,7 +1347,13 @@ async function depthChart() {
             "WROverall": "87",
             "TEOverall": "70",
             "OLineOverall": "A+",
-            "DefenseOverall": "B+"
+            "DefenseOverall": "B+",
+            "QBID": "3046779",
+            "RBID": "4035538",
+            "WRID": "4374302",
+            "TEID": "4430027",
+            "OLineID": "3128689",
+            "DefenseID": "4372099"
           },
           "Green Bay Packers": {
             "QB": "Jordan Love",
@@ -1176,7 +1367,13 @@ async function depthChart() {
             "WROverall": "77",
             "TEOverall": "66",
             "OLineOverall": "A+",
-            "DefenseOverall": "B-"
+            "DefenseOverall": "B-",
+            "QBID": "4036378",
+            "RBID": "4047365",
+            "WRID": "4248528",
+            "TEID": "4428085",
+            "OLineID": "4242000",
+            "DefenseID": "3895429"
           },
           "Minnesota Vikings": {
             "QB": "Sam Darnold",
@@ -1190,7 +1387,13 @@ async function depthChart() {
             "WROverall": "99",
             "TEOverall": "90",
             "OLineOverall": "A-",
-            "DefenseOverall": "B+"
+            "DefenseOverall": "B+",
+            "QBID": "3912547",
+            "RBID": "3042519",
+            "WRID": "4262921",
+            "TEID": "4036133",
+            "OLineID": "3116729",
+            "DefenseID": "4038999"
           },
           "Atlanta Falcons": {
             "QB": "Kirk Cousins",
@@ -1204,7 +1407,13 @@ async function depthChart() {
             "WROverall": "80",
             "TEOverall": "87",
             "OLineOverall": "A+",
-            "DefenseOverall": "B-"
+            "DefenseOverall": "B-",
+            "QBID": "14880",
+            "RBID": "4430807",
+            "WRID": "4426502",
+            "TEID": "4360248",
+            "OLineID": "4242553",
+            "DefenseID": "4239995"
           },
           "Carolina Panthers": {
             "QB": "Bryce Young",
@@ -1218,7 +1427,13 @@ async function depthChart() {
             "WROverall": "82",
             "TEOverall": "71",
             "OLineOverall": "C+",
-            "DefenseOverall": "C-"
+            "DefenseOverall": "C-",
+            "QBID": "4685720",
+            "RBID": "4241416",
+            "WRID": "3932905",
+            "TEID": "4372780",
+            "OLineID": "3056608",
+            "DefenseID": "3040572"
           },
           "New Orleans Saints": {
             "QB": "Derek Carr",
@@ -1232,7 +1447,13 @@ async function depthChart() {
             "WROverall": "84",
             "TEOverall": "75",
             "OLineOverall": "C-",
-            "DefenseOverall": "A-"
+            "DefenseOverall": "A-",
+            "QBID": "16757",
+            "RBID": "3054850",
+            "WRID": "4361370",
+            "TEID": "3929645",
+            "OLineID": "3917331",
+            "DefenseID": "3121421"
           },
           "Tampa Bay Buccaneers": {
             "QB": "Baker Mayfield",
@@ -1246,7 +1467,13 @@ async function depthChart() {
             "WROverall": "90",
             "TEOverall": "73",
             "OLineOverall": "B+",
-            "DefenseOverall": "B+"
+            "DefenseOverall": "B+",
+            "QBID": "3052587",
+            "RBID": "4697815",
+            "WRID": "16737",
+            "TEID": "4243331",
+            "OLineID": "4429251",
+            "DefenseID": "14985"
           },
           "Arizona Cardinals": {
             "QB": "Kyler Murray",
@@ -1260,7 +1487,13 @@ async function depthChart() {
             "WROverall": "74",
             "TEOverall": "74",
             "OLineOverall": "C-",
-            "DefenseOverall": "C-"
+            "DefenseOverall": "C-",
+            "QBID": "3917315",
+            "RBID": "3045147",
+            "WRID": "4432708",
+            "TEID": "4361307",
+            "OLineID": "3886633",
+            "DefenseID": "3127287"
           },
           "Los Angeles Rams": {
             "QB": "Matthew Stafford",
@@ -1274,7 +1507,13 @@ async function depthChart() {
             "WROverall": "96",
             "TEOverall": "80",
             "OLineOverall": "B+",
-            "DefenseOverall": "B-"
+            "DefenseOverall": "B-",
+            "QBID": "12483",
+            "RBID": "4430737",
+            "WRID": "2977187",
+            "TEID": "2573401",
+            "OLineID": "4362474",
+            "DefenseID": "3042717"
           },
           "San Francisco 49ers": {
             "QB": "Brock Purdy",
@@ -1288,7 +1527,13 @@ async function depthChart() {
             "WROverall": "89",
             "TEOverall": "96",
             "OLineOverall": "B-",
-            "DefenseOverall": "A+"
+            "DefenseOverall": "A+",
+            "QBID": "4361741",
+            "RBID": "3117251",
+            "WRID": "3126486",
+            "TEID": "3040151",
+            "OLineID": "2577185",
+            "DefenseID": "4040605"
           },
           "Seattle Seahawks": {
             "QB": "Geno Smith",
@@ -1302,7 +1547,13 @@ async function depthChart() {
             "WROverall": "88",
             "TEOverall": "78",
             "OLineOverall": "C-",
-            "DefenseOverall": "C+"
+            "DefenseOverall": "C+",
+            "QBID": "15864",
+            "RBID": "4567048",
+            "WRID": "4047650",
+            "TEID": "4036131",
+            "OLineID": "4039016",
+            "DefenseID": "4575431"
           }
       };
     return nflData
