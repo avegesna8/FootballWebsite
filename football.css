@@ -40,6 +40,12 @@ body {
     height: auto; /* Maintain aspect ratio */
 }
 
+#playerLogo {
+    width: 500px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 200px;
+}
+
 #singlePlayer,
 #twoPlayer {
     padding: 15px 30px;
@@ -73,6 +79,51 @@ body {
     font-size: 16px; /* Consistent font size */
     color: #333; /* Text color */
 }
+
+#pickTeam {
+    background-color: #0ebda3;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#playAgain {
+    background-color: #0ebda3;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#team {
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: #333;
+    text-align: center;
+}
+
+#team-container {
+    display: flex; /* Enable flexbox layout for alignment */
+    justify-content: flex-end; /* Align content to the right side */
+    width: 50%; /* Set the container to occupy half the screen width */
+}
+#FinalInfo {
+    flex: 1; /* Allow the final info to fill the remaining space */
+    margin-left: 200px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color: #333;
+}
+
+
 
 /* #PlayerA,
 #ComputerTeam {
