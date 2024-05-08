@@ -12,7 +12,7 @@
 
     <body>
             <!-- Initial screen -->
-        <div id="initialScreen" style="background-image: url('Background Image.png'); background-size: cover; width: 100%;
+        <div id="initialScreen" style="background-image: url('/Users/abhinnvegesna/Desktop/Football Game Website/Background Image.png'); background-size: cover; width: 100%;
         height: 100vh;">
 
             <div id="titleAndButtons">
@@ -27,18 +27,40 @@
 
         <!-- Main content -->
         <div id="mainContent" style="display: none;" >
-        <h1>NFL Teams</h1>
+        <h1>Football Mania</h1>
         <!-- Rest of your HTML content -->
         <p class="position">
-            Team: <span id="team"> </span>
+            <span id="team"> </span>
         </p>
+
 
         <button id="pickTeam">Generate Team</button> 
 
-        <img id="teamLogo" alt="Team Logo" style="display: none;">
-
         <button id="playAgain" class="button" style="display: none;">Play Again</button>
-        <button id="computerMode">Computer Mode</button>
+
+        
+
+        <div id="TeamContainer" style="display: flex;">
+            <img id="teamLogo" alt="Team Logo" style="display: none;">
+            <button id="computerMode">Computer Mode</button>
+
+            <img id = "playerLogo" alt="Player Logo" style="display: none">
+
+            <div id="FinalInfo" >  
+                <p class="position">
+                    Winner: <span id="Winner"> </span>
+                    </p>
+                 <p class="position">
+                    Player A Score: <span id="player1Score"> </span>
+                    </p>
+                 <p class="position">
+                    Player B Score: <span id="player2Score"> </span>
+                    </p>
+    
+            </div>
+        </div>
+    
+            
 
         <div id="Teams" style="display: flex;" >
             <div id="PlayerA" >
@@ -132,17 +154,8 @@
 
        
 
-    
 
-        <p class="position">
-            Winner: <span id="Winner"> </span>
-            </p>
-         <p class="position">
-            Player A Score: <span id="player1Score"> </span>
-            </p>
-         <p class="position">
-            Player B Score: <span id="player2Score"> </span>
-            </p>
+    
         
         
         
