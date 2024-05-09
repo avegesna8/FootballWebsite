@@ -243,12 +243,15 @@ async function choosePosition1(position) {
     }
 
     if (computerMode) {
+      
       currentUser = "Computer"
       //document.getElementById("RB1").textContent = "Computer Mode Activated"
       const button = document.getElementById("pickTeam")
+      
       button.click();
     } else {
       currentUser = "Player 2"
+      setPlayerTurn("Player B")
     }
      
 
@@ -257,20 +260,20 @@ async function choosePosition1(position) {
 function ratingToNumber(rating) {
     number = 0
     if (rating === "A+") {
-      number = 100
-    } else if (rating == "A-") {
-      number = 95
-    } else if (rating == "B+") {
       number = 90
-    } else if (rating == "B-") {
+    } else if (rating == "A-") {
       number = 85
-    } else if (rating == "C+") {
+    } else if (rating == "B+") {
       number = 80
-    } else if (rating == "C-") {
+    } else if (rating == "B-") {
       number = 75
+    } else if (rating == "C+") {
+      number = 70
+    } else if (rating == "C-") {
+      number = 65
     } else {
       //rating == "F+"
-      number = 70
+      number = 60
     }
     return number
 }
@@ -396,6 +399,7 @@ async function choosePosition2(position) {
       return null;
   }
   currentUser = "Player 1"
+  setPlayerTurn("Player A")
   if (allPlayer1PositionsSelected && allPlayer2PositionsSelected()) {
     endGame();
   }
@@ -569,6 +573,8 @@ async function choosePositionComputer() {
       proceed = true
     }
     currentUser = "Player 1"
+    setPlayerTurn("Player A")
+    document.getElementById("load").style.visibility = "hidden"
     if (proceed) {
       if (allComputerPositionsSelected()) {
         //document.getElementById("RB1").textContent = "END"
@@ -672,13 +678,26 @@ var mainContent = document.getElementById("mainContent");
     });
 
     document.getElementById("twoPlayer").addEventListener("click", () => {
+      computerMode = false
       // Hide the initial screen
       initialScreen.style.display = "none";
       // Show the main content
       mainContent.style.display = "block";
       document.getElementById("ComputerTeam").style.display = "none"
       document.getElementById("computerMode").style.display = "none"
+      initializeScores()
+      updateScore()
+      setPlayerTurn("Player A")
     })
+    function setPlayerTurn(player) {
+      if (player == "Player A") {
+        document.getElementById("playerTurn").textContent = player + "'s " + "Turn"
+      } else if (player == "Player B") {
+        document.getElementById("playerTurn").textContent = player + "'s " + "Turn"
+      } else {
+        document.getElementById("playerTurn").textContent = player + "'s " + "Turn"
+      }
+    }
 
     document.getElementById("singlePlayer").addEventListener("click", () => {
       // Hide the initial screen
@@ -687,9 +706,13 @@ var mainContent = document.getElementById("mainContent");
       mainContent.style.display = "block";
       document.getElementById("PlayerB").style.display = "none"
       activateComputerMode()
+      initializeScores()
+      updateScore()
+      setPlayerTurn("Player A")
     });
 
     document.getElementById("playAgain").addEventListener("click", () => {
+      document.getElementById("playerTurn").style.visibility = "visible"
       restartGame()
     });
 
@@ -704,6 +727,7 @@ var mainContent = document.getElementById("mainContent");
         document.getElementById("computerMode").style.display= "none"
       }
       if (currentUser == "Player 1") {
+        setPlayerTurn("Player A")
         document.getElementById("playerLogo").style.display = "none"
         enablePlayer1Choices();
         disablePlayer2Choices();
@@ -729,6 +753,7 @@ var mainContent = document.getElementById("mainContent");
         disableTeamButton();
 
       } else if (currentUser == "Player 2") {
+        setPlayerTurn("Player B")
         enablePlayer2Choices();
         disablePlayer1Choices();
         document.getElementById("playerLogo").style.display = "none"
@@ -753,15 +778,17 @@ var mainContent = document.getElementById("mainContent");
         callDisplayTeam();
         disableTeamButton();
       } else {
+        setPlayerTurn("Computer")
+        document.getElementById("load").style.visibility = "visible"
         
+        disableTeamButton();
         setTimeout(() => {
           document.getElementById("playerLogo").style.display = "none"
           disablePlayer1Choices();
           callDisplayTeam();
-          disableTeamButton();
           choosePositionComputer();
 
-        }, 3000);
+        }, 2000);
         
       }
 
@@ -781,22 +808,25 @@ async function enableTeamButton() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //END Game
 function endGame() {
+  document.getElementById("playerTurn").style.visibility = "hidden"
   if (computerMode) {
     disableTeamButton();
     document.getElementById("playAgain").style.display = "block";
     totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
     totalComputerRating = computerTeam.QBOverall + computerTeam.RBOverall + computerTeam.WROverall + computerTeam.TEOverall + computerTeam.OLineOverall + computerTeam.DefenseOverall
     if (totalPlayer1Rating > totalComputerRating) {
-      document.getElementById("Winner").textContent = "Player A"
+      document.getElementById("Winner").textContent = "Nice, You Won!!!"
       player1Score += 1
       document.getElementById("player1Score").textContent = player1Score.toString()
+      displayWinner();
     } else if (totalPlayer1Rating < totalComputerRating) {
-      document.getElementById("Winner").textContent = "Player B".toString()
+      document.getElementById("Loser").textContent = "You Lost :)"
       player2Score += 1
       document.getElementById("player2Score").textContent = player2Score
+      document.querySelector(".loserStuff").style.display = "inline-block";
     } else {
       //Tie Game
-      document.getElementById("Winner").textContent = "Tie"
+      document.getElementById("Winner").textContent = "It was a Tie!!!"
     }
   } else {
     disableTeamButton();
@@ -804,22 +834,37 @@ function endGame() {
     totalPlayer1Rating = player1Team.QBOverall + player1Team.RBOverall + player1Team.WROverall + player1Team.TEOverall + player1Team.OLineOverall + player1Team.DefenseOverall
     totalPlayer2Rating = player2Team.QBOverall + player2Team.RBOverall + player2Team.WROverall + player2Team.TEOverall + player2Team.OLineOverall + player2Team.DefenseOverall
     if (totalPlayer1Rating > totalPlayer2Rating) {
-      document.getElementById("Winner").textContent = "Player A"
+      document.getElementById("Winner").textContent = "Player A Wins!!!"
       player1Score += 1
       document.getElementById("player1Score").textContent = player1Score.toString()
+      displayWinner();
     } else if (totalPlayer1Rating < totalPlayer2Rating) {
-      document.getElementById("Winner").textContent = "Player B".toString()
+      document.getElementById("Winner").textContent = "Player B Wins!!!"
       player2Score += 1
       document.getElementById("player2Score").textContent = player2Score
+      displayWinner();
     } else {
       //Tie Game
-      document.getElementById("Winner").textContent = "Tie"
+      document.getElementById("Winner").textContent = "It was a Tie!!!"
     }
   }
+  updateScore();
+  hideLogos();
+
     
 }
 
+function displayWinner () {
+  document.querySelector(".winnerStuff").style.display = "inline-block";
+}
+function hideLogos() {
+  document.getElementById("teamLogo").style.display = "none"
+  document.getElementById("playerLogo").style.display = "none";
+}
+
 function restartGame() {
+  document.querySelector(".winnerStuff").style.display = "none";
+  document.querySelector(".loserStuff").style.display = "none";
   document.getElementById("playAgain").style.display = "none";
   document.getElementById("playerLogo").style.display = "none";
   document.getElementById("teamLogo").style.display = "none";
@@ -1622,7 +1667,22 @@ async function start() {
   choosePosition1("RB")
 }
 
-document.getElementById("player1Score").textContent = player1Score.toString()
-document.getElementById("player2Score").textContent = player2Score.toString()
+function updateScore() {
+  document.getElementById("player1Score").textContent = player1Score.toString()
+  document.getElementById("player2Score").textContent = "Player B Score: " + player2Score.toString()
+  document.getElementById("computerScore").textContent = "Computer Team Score: " + player2Score.toString()
+
+}
+
+
+
+
+function initializeScores() {
+  if (computerMode) {
+    document.getElementById("player2Score").style.display = "none"
+  } else {
+    document.getElementById("computerScore").style.display = "none"
+  }
+}
 
 
