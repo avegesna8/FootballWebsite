@@ -35,6 +35,35 @@ body {
     align-items: flex-start;
 }
 
+.winnerStuff {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 200px;
+    margin-top: 50px
+}
+#Winner {
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: #333;
+    margin-left: 260px;
+    
+
+}
+
+#Loser {
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: #333;
+    margin-left: 130px;
+    
+
+}
+
 #teamLogo {
     width: 300px; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
@@ -45,6 +74,17 @@ body {
     height: auto; /* Maintain aspect ratio */
     margin-left: 200px;
 }
+#winnerAnimation {
+    width: 500px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 200px;
+    margin-top: 50x
+}
+.loserStuff {
+    margin-left: 200px;
+    margin-top: 50x
+}
+
 
 #singlePlayer,
 #twoPlayer {
@@ -123,6 +163,18 @@ h1 {
     color: #333;
 }
 
+#TeamStuff {
+    display: flex
+}
+#playerTurn {
+    margin-left: 25px
+}
+
+.loading-animation img {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
 
 
 /* #PlayerA,
