@@ -12,7 +12,7 @@
 
     <body>
             <!-- Initial screen -->
-        <div id="initialScreen" style="background-image: url('Background Image.png'); background-size: cover; width: 100%;
+        <div id="initialScreen" style="background-image: url('/Users/abhinnvegesna/Desktop/Football Game Website/Background Image.png'); background-size: cover; width: 100%;
         height: 100vh;">
 
             <div id="titleAndButtons">
@@ -33,8 +33,17 @@
             <span id="team"> </span>
         </p>
 
+        <div id="TeamStuff" >
+            <button id="pickTeam">Generate Team</button>  
+        
+            <span id="playerTurn"></span> 
 
-        <button id="pickTeam">Generate Team</button> 
+            <div id="load"  class="loading-animation" style="visibility: hidden;">
+                <img src="https://i.gifer.com/ZKZg.gif" alt="Loading Animation">
+            </div>
+        </div>
+
+        
 
         <button id="playAgain" class="button" style="display: none;">Play Again</button>
 
@@ -45,16 +54,34 @@
             <button id="computerMode">Computer Mode</button>
 
             <img id = "playerLogo" alt="Player Logo" style="display: none">
+        
+
+
+            <div class="winnerStuff" style="display: none;">
+                <p class="position">
+                    <span id="Winner"> </span>
+                    </p>
+                <img id="winnerAnimation" src="/Users/abhinnvegesna/Downloads/confetti.gif" alt="Winner Animation">
+                <img src="https://pngfre.com/wp-content/uploads/Trophy-3.png" alt="Overlay Image" class="overlay">
+            </div>
+
+            <div class="loserStuff" style="display: none;">
+                <p class="position">
+                    <span id="Loser"> </span>
+                    </p>
+                <img id="loserAnimation" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd25namxqcGFxM2U5NDN0c2xra2J1N24zZW05cjF4cW15bHlrN2x1YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3tBXMMMDQhvpEwRQrf/giphy-downsized-large.gif" alt="Loser Animation">
+                
+            </div>
+
 
             <div id="FinalInfo" >  
-                <p class="position">
-                    Winner: <span id="Winner"> </span>
-                    </p>
+               
                  <p class="position">
                     Player A Score: <span id="player1Score"> </span>
                     </p>
                  <p class="position">
-                    Player B Score: <span id="player2Score"> </span>
+                    <span id="player2Score"> </span>
+                    <span id="computerScore"> </span>
                     </p>
     
             </div>
